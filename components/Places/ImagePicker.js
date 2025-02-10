@@ -8,7 +8,7 @@ import {
 import { Colors } from "../../constants/colors";
 import OutlineButton from "../UI/OutlineButton";
 
-function ImagePicker() {
+function ImagePicker({ onTakeImage }) {
   const [pickedImage, setPickedImage] = useState();
 
   const [cameraPermissionInformation, requestPermission] =
@@ -40,8 +40,10 @@ function ImagePicker() {
       aspect: [16, 9],
       quality: 0.5,
     });
-    console.log(image.assets[0].uri);
-    setPickedImage(image.assets[0].uri);
+    const imageUri = image.assets[0].uri;
+    console.log(imageUri);
+    setPickedImage(imageUri);
+    onTakeImage(imageUri);
   }
 
   let imagePreview = <Text style={{ color: "white" }}>No image taken yet</Text>;
